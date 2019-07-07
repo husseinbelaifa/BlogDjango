@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from .models import Posts
 def index(request):
 
+   
+
     postsList=Posts.objects.all()
 
     paginator=Paginator(postsList,10)
