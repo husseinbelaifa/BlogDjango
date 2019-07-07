@@ -12,3 +12,13 @@ def index(request):
          'posts':posts
     }
     return render(request,'posts/index.html',context)
+
+def show(request,id):
+    post=Posts.objects.get(id=id)
+
+    context={
+        
+        'post':post
+    }
+
+    return render(request,'posts/show.html',context)
