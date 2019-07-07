@@ -3,7 +3,10 @@
 {% block content %}
 <h3 class="center-align red lighten-3">{{title}}</h3>
 
+
 <ul class="collection">
+
+
     {% for post in posts %}
     <li class="collection-item">
         <a href="/posts/details/{{post.id}}"> {{post.title}}</a>
@@ -12,5 +15,25 @@
     {% endfor %}
 
 </ul>
+
+
+<div class="pagination">
+    <div class="step-links">
+        {% if posts.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{posts.previous_page_number}}">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{posts.number}} of {{posts.paginator.num_pages}}
+        </span>
+
+
+        {% if posts.has_next %}
+        <a href="?page={{posts.next_page_number}}">next</a>
+        <a href="?page={{posts.paginator.num_pages}}">last &raquo;</a>
+        {% endif %}
+    </div>
+</div>
 
 {% endblock %}

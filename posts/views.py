@@ -1,23 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django_seed import Seed
+from django.core.paginator import Paginator
 # Create your views here.
 from .models import Posts
 def index(request):
 
-    posts=Posts.objects.all()[:10]
+    postsList=Posts.objects.all()
+
+    paginator=Paginator(postsList,10)
+
+    page=request.GET.get('page')
+
+    posts=paginator.get_page(page)
 
     context={
-         'title':'Latest Posts',
+         'title':'Posts',
          'posts':posts
     }
 
-    # seeder=Seed.seeder()
-    # seeder.add_entity(Posts,100)
-    # inserted_pks = seeder.execute()
-
-    #seed data posts
-
+  
 
     return render(request,'posts/index.html',context)
 
