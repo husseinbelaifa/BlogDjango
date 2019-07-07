@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django_seed import Seed
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
 # Create your views here.
 from .models import Posts
 def index(request):
@@ -36,6 +37,7 @@ def show(request,id):
 def init(request):
 
     seeder=Seed.seeder()
+    seeder.add_entity(User,20)
     seeder.add_entity(Posts,100)
     inserted_pks = seeder.execute()
 
